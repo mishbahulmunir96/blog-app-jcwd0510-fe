@@ -2,28 +2,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { LoginSchema } from "./schema";
+import useForgotPassword from "@/hooks/api/auth/useForgotPassword";
 import { useFormik } from "formik";
+import { ForgotPasswordSchema } from "./schema";
 import { Button } from "@/components/ui/button";
-import useLogin from "@/hooks/api/auth/useLogin";
 
-const LoginPage = () => {
-  const { mutateAsync: login, isPending } = useLogin();
+const ForgotPasswordPage = () => {
+  const { mutateAsync: forgotPassword, isPending } = useForgotPassword();
+
   const formik = useFormik({
     initialValues: {
       email: "",
-      password: "",
     },
-    validationSchema: LoginSchema,
+    validationSchema: ForgotPasswordSchema,
     onSubmit: async (values) => {
-      await login(values);
+      await forgotPassword(values);
     },
   });
+
   return (
     <main className="flex justify-center pt-20">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Sign In</CardTitle>
+          <CardTitle>Forgot password</CardTitle>
         </CardHeader>
 
         <CardContent>
@@ -44,28 +45,10 @@ const LoginPage = () => {
                   <p className="text-xs text-red-500">{formik.errors.email}</p>
                 ) : null}
               </div>
-
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  name="password"
-                  placeholder="password"
-                  type="password"
-                  value={formik.values.password}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-
-                {!!formik.touched.password && !!formik.errors.password ? (
-                  <p className="text-xs text-red-500">
-                    {formik.errors.password}
-                  </p>
-                ) : null}
-              </div>
             </div>
 
             <Button type="submit" className="mt-4 w-full" disabled={isPending}>
-              {isPending ? "Loading..." : "Login"}
+              {isPending ? "Loading..." : "Submit"}
             </Button>
           </form>
         </CardContent>
@@ -74,4 +57,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;
