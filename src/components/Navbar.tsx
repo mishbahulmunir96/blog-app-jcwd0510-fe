@@ -13,8 +13,6 @@ const Navbar = () => {
     localStorage.removeItem("blog-storage");
     // action ketika logout di klik
     dispatch(logoutAction());
-    // saat logout akan kembali loginpage
-    router.push("/login");
   };
 
   return (
@@ -30,7 +28,12 @@ const Navbar = () => {
             <Link href="">Profile</Link>
             {/* menampilkan button sign in saat logout, dan menampilkan button logout saat login */}
             {!user.id && <Link href="/login">Sing In</Link>}
-            {!!user.id && <p onClick={logout}>Logout</p>}
+            {!!user.id && (
+              <>
+                <p onClick={() => router.push("/write")}>Write</p>
+                <p onClick={logout}>Logout</p>
+              </>
+            )}
 
             {/* cara kedua, fungsi sama */}
             {/* {user.id ? <p onClick={logout}>Logout</p> : <Link href="/login">Sing In</Link>} */}
