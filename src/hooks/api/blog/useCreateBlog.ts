@@ -29,7 +29,7 @@ const useCreateBlog = () => {
       createBlogForm.append("content", payload.content);
       createBlogForm.append("thumbnail", payload.thumbnail!);
 
-      const { data } = await axiosInstance.post("/blogs", payload);
+      const { data } = await axiosInstance.post("/blogs", createBlogForm);
       return data;
     },
     onSuccess: async (data) => {

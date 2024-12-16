@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import AuthGuard from "@/hoc/AuthGuard";
 import useCreateBlog from "@/hooks/api/blog/useCreateBlog";
 import { useFormik } from "formik";
 import Image from "next/image";
@@ -21,6 +22,8 @@ const WritePage = () => {
       thumbnail: null,
     },
     onSubmit: async (values) => {
+      console.log(values);
+
       await createBlog(values);
     },
   });
@@ -147,4 +150,4 @@ const WritePage = () => {
   );
 };
 
-export default WritePage;
+export default AuthGuard(WritePage);
