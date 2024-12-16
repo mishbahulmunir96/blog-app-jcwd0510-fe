@@ -21,6 +21,8 @@ const WritePage = () => {
       thumbnail: null,
     },
     onSubmit: async (values) => {
+      console.log(values);
+
       await createBlog(values);
     },
   });
