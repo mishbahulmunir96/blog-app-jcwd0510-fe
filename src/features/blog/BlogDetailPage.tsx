@@ -45,7 +45,12 @@ const BlogDetailPage: FC<BlogDetailPageProps> = ({ blogId }) => {
             {format(new Date(data.createdAt), "dd MMM yyy")} - {data.user.name}
           </p>
 
-          {id === data.userId && <ModalDelete onClick={onClickDeleteBlog} />}
+          {id === data.userId && (
+            <ModalDelete
+              onClick={onClickDeleteBlog}
+              isPending={isPendingDelete}
+            />
+          )}
         </div>
 
         <div className="relative h-[400px]">
