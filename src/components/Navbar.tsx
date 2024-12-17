@@ -16,11 +16,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-slate-400">
+    <nav>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           <Link href="" className="text-xl font-bold">
-            Logo
+            BlogHub
           </Link>
 
           <div className="flex items-center gap-8 font-medium">
@@ -34,9 +34,6 @@ const Navbar = () => {
                 <p onClick={logout}>Logout</p>
               </>
             )}
-
-            {/* cara kedua, fungsi sama */}
-            {/* {user.id ? <p onClick={logout}>Logout</p> : <Link href="/login">Sing In</Link>} */}
           </div>
         </div>
       </div>
