@@ -6,10 +6,11 @@ import BlogCard from "./BlogCard";
 import PaginationSection from "@/components/PaginationSection";
 import { Input } from "@/components/ui/input";
 import { useDebounceValue } from "usehooks-ts";
+import { parseAsInteger, useQueryState } from "nuqs";
 
 const BlogList = () => {
-  const [page, setPage] = useState<number>(1);
-  const [search, setSearch] = useState<string>("");
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+  const [search, setSearch] = useQueryState("search", { defaultValue: "" });
 
   const [debouncedValue] = useDebounceValue(search, 500);
 
@@ -24,7 +25,10 @@ const BlogList = () => {
       <Input
         className="mx-auto my-4 max-w-xl"
         placeholder="search..."
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setPage(1);
+        }}
         value={search}
       ></Input>
 

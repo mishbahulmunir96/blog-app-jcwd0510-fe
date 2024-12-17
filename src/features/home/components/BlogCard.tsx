@@ -32,6 +32,7 @@ const BlogCard: FC<BlogCardProps> = ({ blog }) => {
             >
               {blog.category}
             </Badge>
+
             <Badge
               variant="outline"
               className="rounded-sm bg-gray-100 text-gray-600"
@@ -39,6 +40,8 @@ const BlogCard: FC<BlogCardProps> = ({ blog }) => {
               {format(blog.createdAt, "dd MMM yyyy")}
             </Badge>
           </div>
+
+          <p className="my-1 text-sm font-light">{blog.user.name}</p>
 
           <h2 className="my-2 line-clamp-2 text-lg font-bold">{blog.title}</h2>
           <p className="line-clamp-4">{blog.description}</p>

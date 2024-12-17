@@ -1,13 +1,13 @@
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import StoreProvider from "@/providers/StoreProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import Navbar from "../components/Navbar";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import StoreProvider from "@/providers/StoreProvider";
-import AuthProvider from "@/providers/authProvider";
-import TokenProvider from "@/providers/TokenProvider";
+import Navbar from "../components/Navbar";
+import "./globals.css";
+import NextAuthProvider from "@/providers/NextAuthProvider";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -35,18 +35,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <StoreProvider>
-          <AuthProvider>
-            <TokenProvider>
+        <NextAuthProvider>
+          <NuqsAdapter>
+            <StoreProvider>
               <ReactQueryProvider>
                 <Navbar />
                 {children}
               </ReactQueryProvider>
 
               <ToastContainer />
-            </TokenProvider>
-          </AuthProvider>
-        </StoreProvider>
+            </StoreProvider>
+          </NuqsAdapter>
+        </NextAuthProvider>
       </body>
     </html>
   );
