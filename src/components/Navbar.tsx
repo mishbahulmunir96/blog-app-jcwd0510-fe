@@ -1,22 +1,18 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logoutAction } from "@/redux/slices/userSlices";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Navbar = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
-  const user = useAppSelector((state) => state.user);
+  const { data } = useSession();
 
-  const logout = () => {
-    localStorage.removeItem("blog-storage");
-    // action ketika logout di klik
-    dispatch(logoutAction());
-  };
+  const user = data?.user;
+
+  const logout = () => signOut();
 
   return (
-    <nav>
+    <nav className="sticky top-0">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between py-2">
           <Link href="" className="text-xl font-bold">
@@ -27,8 +23,8 @@ const Navbar = () => {
             <Link href="">Home</Link>
             <Link href="">Profile</Link>
             {/* menampilkan button sign in saat logout, dan menampilkan button logout saat login */}
-            {!user.id && <Link href="/login">Sing In</Link>}
-            {!!user.id && (
+            {!user?.id && <Link href="/login">Sing In</Link>}
+            {!!user?.id && (
               <>
                 <p onClick={() => router.push("/write")}>Write</p>
                 <p onClick={logout}>Logout</p>
