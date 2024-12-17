@@ -32,7 +32,7 @@ const PaginationSection: FC<PaginationSectionProps> = ({
     }
   };
   return (
-    <Pagination className="mt-12">
+    <Pagination className="my-12">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious onClick={handlePrev} />

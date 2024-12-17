@@ -8,9 +8,11 @@ interface MarkdownProps {
 
 const Markdown: FC<MarkdownProps> = ({ content }) => {
   const renderers: Components = {
+    h1: ({ children }) => <h1 className="text-2xl font-bold">{children}</h1>,
     h2: ({ children }) => <h2 className="text-xl font-bold">{children}</h2>,
-    p: ({ children }) => <p className="text-base font-light">{children}</p>,
+    p: ({ children }) => <p className="text-base">{children}</p>,
   };
+
   return (
     <ReactMarkdown rehypePlugins={[rehypeRaw]} components={renderers}>
       {content}
