@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import useRegister from "@/hooks/api/auth/useRegister";
 import { useFormik } from "formik";
 import { RegisterSchema } from "./schema";
+import Link from "next/link";
 
 const RegisterPage = () => {
   const { mutateAsync: register, isPending } = useRegister();
@@ -83,6 +84,10 @@ const RegisterPage = () => {
             <Button type="submit" className="mt-4 w-full" disabled={isPending}>
               {isPending ? "Loading..." : "Register"}
             </Button>
+
+            <Link href="/login" className="mt-4 flex justify-center text-xs">
+              Have account? login here
+            </Link>
           </form>
         </CardContent>
       </Card>
