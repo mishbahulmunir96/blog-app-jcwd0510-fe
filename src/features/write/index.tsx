@@ -8,6 +8,7 @@ import useCreateBlog from "@/hooks/api/blog/useCreateBlog";
 import { useFormik } from "formik";
 import Image from "next/image";
 import { ChangeEvent, useRef, useState } from "react";
+import { CreateBlogSchema } from "./schema";
 
 const WritePage = () => {
   const { mutateAsync: createBlog, isPending } = useCreateBlog();
@@ -20,6 +21,7 @@ const WritePage = () => {
       content: "",
       thumbnail: null,
     },
+    validationSchema: CreateBlogSchema,
     onSubmit: async (values) => {
       console.log(values);
 
@@ -106,7 +108,9 @@ const WritePage = () => {
           label="Content"
           value={formik.values.content}
           onChange={(value: string) => formik.setFieldValue("content", value)}
-          isError={!!formik.errors.content}
+          isTouch={formik.touched.content}
+          setError={formik.setFieldError}
+          setTouch={formik.setFieldTouched}
         />
 
         {selectedImage && (
